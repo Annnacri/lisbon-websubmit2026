@@ -14,6 +14,7 @@ import { CreatorTeaser } from './components/CreatorTeaser';
 import { AboutCreator } from './components/AboutCreator';
 import { Footer } from './components/Footer';
 import { PortugueseGuitarPlayer } from './components/PortugueseGuitarPlayer';
+import { SocialShare } from './components/SocialShare';
 
 import { LISBON_SPOTS } from './data/lisbonData';
 import { getLocalizedSpots } from './i18n/contentLocalization';
@@ -272,6 +273,13 @@ export default function App() {
           currentLang={currentLang}
           onBackToExplore={() => scrollToSection('what-to-do')}
         />
+
+        {/* Dedicated Social Share Section */}
+        <section id="share" className="py-12 bg-gradient-to-b from-amber-50/30 via-white to-amber-50/20 border-t border-amber-900/10">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SocialShare currentLang={currentLang} variant="card" />
+          </div>
+        </section>
 
       </main>
 

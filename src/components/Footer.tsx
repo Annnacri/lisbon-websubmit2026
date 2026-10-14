@@ -2,6 +2,7 @@ import React from 'react';
 import { Compass, Sparkles, Heart, ShieldCheck, MapPin, Globe } from 'lucide-react';
 import { SupportedLanguage } from '../types';
 import { TRANSLATIONS } from '../i18n/translations';
+import { SocialShare } from './SocialShare';
 
 interface FooterProps {
   currentLang: SupportedLanguage;
@@ -159,6 +160,11 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onLanguageChange, o
             </div>
           </div>
 
+        </div>
+
+        {/* Dedicated Social Share Bar in Footer */}
+        <div className="pt-8 border-t border-stone-800">
+          <SocialShare currentLang={currentLang} variant="footer" />
         </div>
 
         {/* Footer Language Switcher Row */}

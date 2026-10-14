@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Compass, Sparkles, MapPin, Menu, X, Globe, Euro, Clock, Train, Volume2, VolumeX, Music } from 'lucide-react';
+import { Compass, Sparkles, MapPin, Menu, X, Globe, Euro, Clock, Train, Volume2, VolumeX, Music, Share2 } from 'lucide-react';
 import { SupportedLanguage } from '../types';
 import { TRANSLATIONS } from '../i18n/translations';
 import { portugueseGuitar } from '../utils/portugueseGuitarAudio';
+import { SocialShareModal } from './SocialShare';
 
 interface HeaderProps {
   currentLang: SupportedLanguage;
@@ -23,6 +24,7 @@ export const Header: React.FC<HeaderProps> = ({ currentLang, onLanguageChange, o
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [isGuitarPlaying, setIsGuitarPlaying] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
   const t = TRANSLATIONS[currentLang];
 
   useEffect(() => {
@@ -120,6 +122,18 @@ export const Header: React.FC<HeaderProps> = ({ currentLang, onLanguageChange, o
 
           {/* Right Action: Language Selector & AI Button */}
           <div className="flex items-center gap-2 sm:gap-3">
+
+            {/* Social Share Button */}
+            <button
+              type="button"
+              onClick={() => setShareModalOpen(true)}
+              title={currentLang === 'pt' ? 'Partilhar nas Redes Sociais' : 'Share on Social Media'}
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 text-xs font-semibold rounded-lg bg-white text-slate-700 border border-stone-200 hover:bg-amber-50 hover:border-amber-300 shadow-2xs transition-all cursor-pointer select-none"
+              aria-label="Partilhar"
+            >
+              <Share2 className="w-3.5 h-3.5 text-[#C85A32]" />
+              <span className="hidden sm:inline">{currentLang === 'pt' ? 'Partilhar' : currentLang === 'es' ? 'Compartir' : currentLang === 'de' ? 'Teilen' : currentLang === 'fr' ? 'Partager' : currentLang === 'it' ? 'Condividi' : 'Share'}</span>
+            </button>
 
             {/* Portuguese Guitar Sound Toggle Button */}
             <button
@@ -324,8 +338,30 @@ export const Header: React.FC<HeaderProps> = ({ currentLang, onLanguageChange, o
             <span>{t.aboutTheCreatorTitle}</span>
             <span>→</span>
           </button>
+
+          {/* Mobile Share Action */}
+          <div className="pt-2 border-t border-stone-200">
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setShareModalOpen(true);
+              }}
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-[#C85A32] text-white font-semibold text-sm shadow-sm hover:opacity-95 transition-opacity cursor-pointer"
+            >
+              <Share2 className="w-4 h-4 text-white" />
+              <span>{currentLang === 'pt' ? 'Partilhar nas Redes Sociais' : 'Share on Social Media'}</span>
+            </button>
+          </div>
         </div>
       )}
+
+      {/* Social Share Modal Popup */}
+      <SocialShareModal
+        isOpen={shareModalOpen}
+        onClose={() => setShareModalOpen(false)}
+        currentLang={currentLang}
+      />
     </header>
   );
 };

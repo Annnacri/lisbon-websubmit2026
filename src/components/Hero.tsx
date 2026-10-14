@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Compass, Sparkles, MapPin, CheckCircle2, ArrowRight, Music } from 'lucide-react';
+import { Compass, Sparkles, MapPin, CheckCircle2, ArrowRight, Music, Share2 } from 'lucide-react';
 import { SupportedLanguage } from '../types';
 import { TRANSLATIONS } from '../i18n/translations';
 import { portugueseGuitar } from '../utils/portugueseGuitarAudio';
+import { SocialShare } from './SocialShare';
 
 interface HeroProps {
   currentLang: SupportedLanguage;
@@ -208,6 +209,15 @@ export const Hero: React.FC<HeroProps> = ({
                 </span>
                 <span className={`w-2 h-2 rounded-full ${isGuitarPlaying ? 'bg-emerald-600 animate-ping' : 'bg-amber-500'}`} />
               </button>
+            </div>
+
+            {/* Quick Social Share Buttons */}
+            <div className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+              <span className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+                <Share2 className="w-3.5 h-3.5 text-[#C85A32]" />
+                <span>{currentLang === 'pt' ? 'Partilhar nas redes:' : 'Share guide:'}</span>
+              </span>
+              <SocialShare currentLang={currentLang} variant="compact" />
             </div>
 
             {/* Practical Value Badges */}
