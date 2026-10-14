@@ -1,0 +1,6 @@
+{
+  "name": "Lisbon Made Easy",
+  "description": "Discover Lisbon with a free local guide to attractions, local food, nightlife, transport, hidden gems and practical tips for short stays.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
